@@ -1166,7 +1166,7 @@ enum xkb_state_component {
  *
  * @sa xkb_state_update_mask()
  */
-enum xkb_state_component
+xkb_mod_mask_t
 xkb_state_update_key(struct xkb_state *state, xkb_keycode_t key,
                      enum xkb_key_direction direction);
 
@@ -1197,7 +1197,7 @@ xkb_state_update_key(struct xkb_state *state, xkb_keycode_t key,
  * @sa xkb_state_component
  * @sa xkb_state_update_key
  */
-enum xkb_state_component
+xkb_mod_mask_t
 xkb_state_update_mask(struct xkb_state *state,
                       xkb_mod_mask_t depressed_mods,
                       xkb_mod_mask_t latched_mods,
@@ -1331,7 +1331,7 @@ enum xkb_state_match {
  */
 xkb_mod_mask_t
 xkb_state_serialize_mods(struct xkb_state *state,
-                         enum xkb_state_component components);
+                         xkb_mod_mask_t components);
 
 /**
  * The counterpart to xkb_state_update_mask for layouts, to be used on
@@ -1353,7 +1353,7 @@ xkb_state_serialize_mods(struct xkb_state *state,
  */
 xkb_layout_index_t
 xkb_state_serialize_layout(struct xkb_state *state,
-                           enum xkb_state_component components);
+                           xkb_mod_mask_t components);
 
 /**
  * Test whether a modifier is active in a given keyboard state by name.

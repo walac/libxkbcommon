@@ -678,7 +678,7 @@ xkb_state_update_derived(struct xkb_state *state)
     xkb_state_led_update_all(state);
 }
 
-static enum xkb_state_component
+static xkb_mod_mask_t
 get_state_component_changes(const struct state_components *a,
                             const struct state_components *b)
 {
@@ -710,7 +710,7 @@ get_state_component_changes(const struct state_components *a,
  * Given a particular key event, updates the state structure to reflect the
  * new modifiers.
  */
-XKB_EXPORT enum xkb_state_component
+XKB_EXPORT xkb_mod_mask_t
 xkb_state_update_key(struct xkb_state *state, xkb_keycode_t kc,
                      enum xkb_key_direction direction)
 {
@@ -760,7 +760,7 @@ xkb_state_update_key(struct xkb_state *state, xkb_keycode_t kc,
  * lossy, and should only be used to update a slave state mirroring the
  * master, e.g. in a client/server window system.
  */
-XKB_EXPORT enum xkb_state_component
+XKB_EXPORT xkb_mod_mask_t
 xkb_state_update_mask(struct xkb_state *state,
                       xkb_mod_mask_t base_mods,
                       xkb_mod_mask_t latched_mods,
@@ -861,7 +861,7 @@ xkb_state_key_get_one_sym(struct xkb_state *state, xkb_keycode_t kc)
  */
 XKB_EXPORT xkb_mod_mask_t
 xkb_state_serialize_mods(struct xkb_state *state,
-                         enum xkb_state_component type)
+                         xkb_mod_mask_t type)
 {
     xkb_mod_mask_t ret = 0;
 
@@ -884,7 +884,7 @@ xkb_state_serialize_mods(struct xkb_state *state,
  */
 XKB_EXPORT xkb_layout_index_t
 xkb_state_serialize_layout(struct xkb_state *state,
-                           enum xkb_state_component type)
+                           xkb_mod_mask_t type)
 {
     xkb_layout_index_t ret = 0;
 
